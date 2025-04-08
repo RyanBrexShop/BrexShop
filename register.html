@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrexShop Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ADD8E6;
+        }
+        header {
+            background-color: #007FFF;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        label, input, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        input, button {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007FFF;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ADD8E6;
+        }
+        .access-option {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .access-option button {
+            background-color: #007FFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .access-option button:hover {
+            background-color: #ADD8E6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Registrati</h1>
+    </header>
+    <div class="container">
+        <form id="register-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+            <button type="submit">Crea Account</button>
+        </form>
+        <div class="access-option">
+            <p>Hai già un account?</p>
+            <button onclick="goToLogin()">Accedi</button>
+        </div>
+    </div>
+    <script>
+        // Gestione registrazione
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Salva l'account nel localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const userExists = users.find(user => user.email === email);
+
+            if (userExists) {
+                alert('Esiste già un account con questa email!');
+            } else {
+                users.push({ email, password });
+                localStorage.setItem('users', JSON.stringify(users));
+                alert('Account creato con successo! Vai alla pagina di login per accedere.');
+                window.location.href = 'login.html'; // Reindirizza al login
+            }
+        });
+
+        // Funzione per reindirizzare al login
+        function goToLogin() {
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
+BrexShop©
